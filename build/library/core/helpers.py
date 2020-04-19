@@ -1,6 +1,5 @@
 from datetime import datetime
-from ..managers.models import Managers
-from ..users.models import Users
+from ..profiles.models import Profiles
 
 def get_now_strftime():
     now = datetime.now()
@@ -8,6 +7,25 @@ def get_now_strftime():
     clock = now.strftime('%H-%M')
 
 
-def check_user_or_manager(email):
-    pass
+def check_user_or_manager(username, password):
+    profile = Profiles.objects.filter(username=username)
+    if not profile.exists():
+        return {'404': 'user not found'}
+    profile = profile.last()
+    profile_type = getattr(profile, 'managers', 'user')
+    if profile_type == 'user':
+        if profile.password != password:
+            return {'401': 'incorrect password'}
+        data = {
+            'profile_type': 'user',
+            'user_obj': profile.users
+        }
+    else:
+        if profile.password != password:
+            return {'401': 'incorrect password'}
+        data = {
+            'profile_type': 'manager',
+            'manager_obj': profile.managers
+        }
+    return data
 

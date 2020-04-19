@@ -1,6 +1,6 @@
 from rest_framework.decorators import api_view
 from django.shortcuts import render
-
+from ..core.helpers import check_user_or_manager
 
 @api_view(['GET'])
 def test(request):
@@ -14,6 +14,8 @@ def MainEnterPageView(request):
     if request.method == 'POST':
         username = request.POST['uname']
         password = request.POST['psw']
-        print(username)
-        print(password)
+        result = check_user_or_manager(username, password)
+        if result.get('404') or result.get('401'):
+            return render(request, '404-not-found.html')
+
         return render(request, 'test.html')
