@@ -4,12 +4,18 @@ from isbn_field import ISBNField
 
 
 class Users(models.Model):
-    profile = models.OneToOneField(Profiles, on_delete=models.CASCADE,
-                                   )
-    username = models.EmailField(blank=False, null=False)
-    password = models.CharField(max_length=50)
-
+    profile = models.OneToOneField(Profiles, on_delete=models.CASCADE,)
     user = models.BooleanField(default=True)
+
+    @property
+    def username(self):
+        return '{}'.format(self.profile.username)
+
+
+    @property
+    def password(self):
+        return '{}'.format(self.profile.password)
+
 
 class Books(models.Model):
     user = models.ForeignKey(Users, on_delete=models.CASCADE,

@@ -9,5 +9,5 @@ def get_now_strftime():
 
 
 def check_user_or_manager(email):
-
+    pass
 

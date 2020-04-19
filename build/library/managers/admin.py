@@ -3,7 +3,7 @@ from .models import Managers
 
 
 class ManagersAdmin(admin.ModelAdmin):
-    list_display = ('profile', 'username', 'password')
+    list_display = ('username', 'password',)
 
 
 admin.site.register(Managers, ManagersAdmin)
