@@ -14,3 +14,12 @@ class Managers(models.Model):
     @property
     def password(self):
         return '{}'.format(self.profile.password)
+
+
+class Books(models.Model):
+    name = models.CharField(max_length=255, null=True, blank=True)
+    isbn = models.IntegerField(blank=False, null=False)
+
+
+class TimeJumps(models.Model):
+    day = models.IntegerField(blank=True, null=True)

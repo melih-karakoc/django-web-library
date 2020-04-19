@@ -17,5 +17,9 @@ def MainEnterPageView(request):
         result = check_user_or_manager(username, password)
         if result.get('404') or result.get('401'):
             return render(request, '404-not-found.html')
+        if result['profile_type'] == 'manager':
+            return render(request, 'manager-main-page.html')
+        if result['profile_type'] == 'user':
+            pass
 
         return render(request, 'test.html')
