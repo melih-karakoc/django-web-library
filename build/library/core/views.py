@@ -18,8 +18,14 @@ def MainEnterPageView(request):
         if result.get('404') or result.get('401'):
             return render(request, '404-not-found.html')
         if result['profile_type'] == 'manager':
-            return render(request, 'manager-main-page.html')
+            context = {
+                'profile_id': result['profile_id']
+            }
+            return render(request, 'manager-main-page.html', context=context)
         if result['profile_type'] == 'user':
-            return render(request, 'users/user-main-page.html')
+            context = {
+                'profile_id': result['profile_id']
+            }
+            return render(request, 'users/user-main-page.html', context)
 
         return render(request, 'test.html')

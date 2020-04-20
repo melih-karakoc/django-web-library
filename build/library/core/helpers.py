@@ -18,14 +18,16 @@ def check_user_or_manager(username, password):
             return {'401': 'incorrect password'}
         data = {
             'profile_type': 'user',
-            'user_obj': profile.users
+            'user_obj': profile.users,
+            'profile_id': profile.id
         }
     else:
         if profile.password != password:
             return {'401': 'incorrect password'}
         data = {
             'profile_type': 'manager',
-            'manager_obj': profile.managers
+            'manager_obj': profile.managers,
+            'profile_id': profile.id
         }
     return data
 
