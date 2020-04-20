@@ -2,6 +2,8 @@ from django.conf.urls import url
 from .views import *
 
 urlpatterns = [
-    url(r'add/book/$', ImageUploadView, name='add-book'),
+    url(r'add/book/(?P<profile_id>\d+)$', ImageUploadView, name='add-book'),
+    url(r'user/list/(?P<profile_id>\d+)$',
+        ManagerUserListView, name='user-list'),
 
 ]
