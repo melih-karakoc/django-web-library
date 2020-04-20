@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Yönetici Paneli</title>
+<style>
+.btn {
+  border: none;
+  color: white;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.success {background-color: #4CAF50;} /* Green */
+.success:hover {background-color: #46a049;}
+
+.info {background-color: #2196F3;} /* Blue */
+.info:hover {background: #0b7dda;}
+
+.warning {background-color: #ff9800;} /* Orange */
+.warning:hover {background: #e68a00;}
+
+</style>
+</head>
+<body>
+
+<h1>Yönetici Modülleri </h1>
+
+<form  action="/api/add/book/{{profile_id}}" method="get">
+    <button class="btn success">Kitap Ekleme</button>
+
+</form>
+<form action="/api/time/jump/{{profile_id}}" method="get">
+    <button class="btn info">Zaman Atlama</button>
+</form>
+<form action="/api/user/list/{{profile_id}}">
+    <button class="btn warning">Kullanıcı Listeleme</button>
+</form>
+
+</body>
+</html>

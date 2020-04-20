@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+
+<label>&nbsp;&nbsp;&nbsp;&nbsp;Kullanici Adi &nbsp;&nbsp;&nbsp;&nbsp;</label>
+<label>Kitap ISBN&nbsp;&nbsp;&nbsp;&nbsp;</label>
+<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kitap Adi</label>
+<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verilis Tarihi</label>
+<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Teslim Tarihi</label>
+<ul>
+    {% for ub in userbooks %}
+    <li>{{ ub.username}} &nbsp;&nbsp;&nbsp;&nbsp; {{ub.book_isbn }}
+        &nbsp;&nbsp;&nbsp;&nbsp; {{ub.book_name}}
+        &nbsp;&nbsp;&nbsp;&nbsp; {{ub.receiving_date}}
+        &nbsp;&nbsp;&nbsp;&nbsp; {{ub.delivery_date}}
+    </li>
+    {% endfor %}
+</ul>
+<form action="giris/">
+    <button>Geri Don</button>
+</form>
+</body>
+</html>

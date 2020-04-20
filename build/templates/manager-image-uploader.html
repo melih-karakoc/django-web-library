@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Lütfen kitap adını doldurmayı unutmayın</h1>
+
+<form action="add/book/{{profile_id}}" method="post" enctype='multipart/form-data'>{% csrf_token %}
+  <label for="img">Resim Seçiniz</label>
+  <input type="file" id="img" name="img" accept="image/*">
+  <br><br>
+  <p>Kitap Adı:</p>
+  <br>
+    <input type="text" name="name" >
+  <br>
+  <button type="submit">Gönder</button>
+</form>
+
+</body>
+</html>

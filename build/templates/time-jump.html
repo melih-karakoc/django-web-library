@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<form action="time/jump/{{profile_id}}" method="post" enctype='multipart/form-data'>{% csrf_token %}
+
+    <label> Atlamak Istediginiz Gun Sayisini Giriniz:</label>
+    <input type="text"  name="time_jump">
+    <button  type="submit">Gonder</button>
+
+</form>
+<br><br>
+<br><br>
+
+<br><br>
+<form action="time/jump/{{profile_id}}" method="post" enctype="multipart/form-data">{% csrf_token %}
+     <button type="submit" class="btn btn-danger">Sistemi Sifirla</button>
+    <input type = "hidden" name = "reset" value = "0" />
+</form>
+
+
+</body>
+</html>

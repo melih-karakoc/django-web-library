@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SEARCH BOOK</title>
+</head>
+<body>
+
+<form action="/api/search/book/{{profile_id}}" method="post" enctype='multipart/form-data'>{% csrf_token %}
+    <label >Kitap İsmi:</label>
+    <input type="text"  name="book-name">
+    <br><br>
+    <label> YADA </label>
+    <br>
+    <label>Kitap ISBN NO:</label>
+    <input type="text" name="isbn-no" >
+    <br><br>
+    <button type="submit">Gönder</button>
+</form>
+
+</body>
+</html>

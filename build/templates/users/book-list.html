@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+
+<label>&nbsp;&nbsp;&nbsp;&nbsp;Kitap Adı &nbsp;&nbsp;&nbsp;&nbsp;</label> <label>Kitap ISBN</label>
+<ul>
+  {% for book in books %}
+    <li>{{ book.book_name}} &nbsp;&nbsp;&nbsp;&nbsp; {{book.book_isbn }}</li>
+  {% endfor %}
+</ul>
+
+
+<h2>Çoklu Seçim yapabilirsiniz</h2>
+
+<form action="/api/take/book/{{profile_id}}" method="post">{% csrf_token %}
+    <label for="books">Kitap yada kitaplar seciniz: </label>
+    <br><br>
+{% for book in books %}
+  <select id="books" name="books" size="1" multiple>
+    <option value="{{book.book_isbn}}">{{ book.book_isbn}}</option>
+  </select><br><br>
+{% endfor %}
+
+    <input type="submit">
+</form>
+
+<p>İstediğiniz kitapların  ISBN numaralarına tıklayın</p>
+
+</body>
+</html>
