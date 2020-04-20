@@ -18,7 +18,7 @@ class Managers(models.Model):
 
 class Books(models.Model):
     name = models.CharField(max_length=255, null=True, blank=True)
-    isbn = models.IntegerField(blank=False, null=False)
+    isbn = models.IntegerField(unique=True, blank=False, null=False)
 
 
 class TimeJumps(models.Model):

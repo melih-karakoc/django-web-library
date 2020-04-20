@@ -6,5 +6,5 @@ class Profiles(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
 
-    username = models.EmailField(blank=False, null=True)
-    password = models.CharField(max_length=50, null=True)
+    username = models.EmailField(unique=True, blank=False, null=False)
+    password = models.CharField(max_length=50, null=False, blank=False)

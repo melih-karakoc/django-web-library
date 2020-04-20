@@ -3,6 +3,7 @@ from django.shortcuts import render
 from .helpers import isbn_number_read
 from .models import Books
 
+
 @api_view(['GET', 'POST'])
 def ImageUploadView(request):
     if request.method == 'GET':
@@ -19,7 +20,14 @@ def ImageUploadView(request):
                 'backto': 'Girise geri don'
 
             }
-            obj, created = Books.objects.get_or_create(isbn=isbn, name=book_name)
+            try:
+                Books.objects.create(isbn=isbn, name=book_name)
+            except Exception:
+                context = {
+                    'body': 'ISBN numarali bir kitap sistemde zaten mevcut',
+                    'url': 'add/book/'
+                }
+                return render(request, '500-template.html', context)
             return render(request, 'success.html', context)
         else:
             context = {

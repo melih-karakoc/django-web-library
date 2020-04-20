@@ -20,6 +20,6 @@ def MainEnterPageView(request):
         if result['profile_type'] == 'manager':
             return render(request, 'manager-main-page.html')
         if result['profile_type'] == 'user':
-            pass
+            return render(request, 'users/user-main-page.html')
 
         return render(request, 'test.html')
