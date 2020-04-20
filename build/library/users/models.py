@@ -23,7 +23,7 @@ class Users(models.Model):
 
 class UserBooks(models.Model):
     user = models.ForeignKey(Users, on_delete=models.CASCADE,
-                             related_name='book')
+                             related_name='book', null=True)
     # name = models.CharField(max_length=255, null=True, blank=True)
     # isbn = models.IntegerField(blank=False, null=False)
     book = models.OneToOneField(Books, on_delete=models.CASCADE, null=True)

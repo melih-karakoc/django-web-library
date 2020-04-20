@@ -6,7 +6,7 @@ class Managers(models.Model):
     profile = models.OneToOneField(Profiles, on_delete=models.CASCADE,
                                    )
     manager = models.BooleanField(default=True)
-
+    time_jump = models.IntegerField(blank=True, null=True)
     @property
     def username(self):
         return '{}'.format(self.profile.username)

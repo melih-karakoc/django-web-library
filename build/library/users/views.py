@@ -6,6 +6,7 @@ from dateutil.relativedelta import relativedelta
 from ..managers.models import Books
 from ..profiles.models import Profiles
 from ..users.models import UserBooks
+from ..managers.helpers import isbn_number_read
 
 
 @api_view(['GET', 'POST'])
@@ -64,7 +65,6 @@ def UserBookSearchView(request, profile_id):
 
 @api_view(['GET', 'POST'])
 def UserTakeBooks(request, profile_id):
-    import ipdb; ipdb.set_trace()
     if request.method == 'POST':
         books = request.POST.getlist('books')
         profile = Profiles.objects.get(id=profile_id)
@@ -121,4 +121,33 @@ def UserTakeBooks(request, profile_id):
         return render(request, 'success.html', context)
 
 
+@api_view(['GET', 'POST'])
+def UserReturnBookView(request, profile_id):
+    if request.method == 'GET':
+        context = {
+            'profile_id': profile_id,
+        }
+        return render(request, 'users/give-book.html', context)
+    if request.method == 'POST':
+        image = request.FILES['img']
+        isbn = isbn_number_read(image)
+        if not isbn:
+            context = {
+                'body': 'ISBN okunamadı lütfen tekrar deneyiniz',
+                'url': 'return/book/{}'.format(profile_id)
+            }
+            return render(request, '500-template.html', context)
+        book = Books.objects.filter(userbooks__user__profile__id=4,
+                                    isbn=isbn).last()
+        if book:
+            ub = UserBooks.objects.filter(book=book).last()
+            check = ub.delete()
+            if check:
+                context = {
+                    'header': 'Success',
+                    'body': 'Tebrikler kitabi iade ettiniz',
+                    'url': 'giris/',
+                    'backto': 'Girise geri don'
 
+                }
+                return render(request, 'success.html', context)
