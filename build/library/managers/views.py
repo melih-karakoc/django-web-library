@@ -1,7 +1,7 @@
 from rest_framework.decorators import api_view
 from django.shortcuts import render
 from .helpers import isbn_number_read
-from .models import Books
+from .models import Books, TimeJumps
 from ..users.models import UserBooks
 
 
@@ -50,9 +50,50 @@ def ManagerUserListView(request, profile_id):
             data.append({
                 'username': ub.user.profile.username,
                 'book_name': ub.book.name,
-                'book_isbn': ub.book.isbn
+                'book_isbn': ub.book.isbn,
+                'receiving_date': ub.receiving_date,
+                'delivery_date': ub.delivery_date,
             })
         context = {
             'userbooks': data
         }
         return render(request, 'manager-user-list.html', context)
+
+
+@api_view(['GET', 'POST'])
+def MangerTimeJumpView(request, profile_id):
+    if request.method == 'GET':
+        context = {
+            'profile_id': profile_id
+        }
+        return render(request, 'time-jump.html', context)
+    if request.method == 'POST':
+        if request.POST.get('time_jump'):
+            time_jump = int(request.POST['time_jump'])
+            check = TimeJumps.objects.create(day=time_jump)
+            if check:
+                context = {
+                    'header': 'Success',
+                    'body': 'Sistem zamani {} kadar degisti'.format(time_jump),
+                    'url': 'giris/',
+                    'backto': 'Girise geri don'
+
+                }
+                return render(request, 'success.html', context)
+        elif request.POST.get('reset'):
+            time_jump_value = int(request.POST['reset'])
+            time_jump = TimeJumps.objects.last()
+            if time_jump:
+                time_jump.day = time_jump_value
+                time_jump.save()
+            else:
+                TimeJumps.objects.create(day=time_jump_value)
+
+            context = {
+                'header': 'Success',
+                'body': 'Sistem zamani sifirlandi',
+                'url': 'giris/',
+                'backto': 'Girise geri don'
+
+            }
+            return render(request, 'success.html', context)

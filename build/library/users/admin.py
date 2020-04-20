@@ -7,7 +7,8 @@ class UsersAdmin(admin.ModelAdmin):
 
 
 class UsersBookAdmin(admin.ModelAdmin):
-    list_display = ('username', 'book_name', 'receiving_date', 'delivery_date',
+    list_display = ('username', 'book_name', 'book_isbn', 'receiving_date',
+                    'delivery_date',
     )
 
 admin.site.register(Users, UsersAdmin)

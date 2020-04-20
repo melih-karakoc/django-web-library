@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
-from ..managers.models import Books
+from ..managers.models import Books, TimeJumps
 from ..profiles.models import Profiles
 from ..users.models import UserBooks
 from ..managers.helpers import isbn_number_read
@@ -77,6 +77,9 @@ def UserTakeBooks(request, profile_id):
             }
             return render(request, '500-template.html', context)
         now = datetime.now()
+        time_jump = TimeJumps.objects.last()
+        if time_jump:
+            now = now + relativedelta(days=time_jump.day)
         receiving_date = now
         delivery_date = now + relativedelta(days=7)
         # user take book conditions
@@ -131,13 +134,14 @@ def UserReturnBookView(request, profile_id):
     if request.method == 'POST':
         image = request.FILES['img']
         isbn = isbn_number_read(image)
+
         if not isbn:
             context = {
                 'body': 'ISBN okunamadı lütfen tekrar deneyiniz',
                 'url': 'return/book/{}'.format(profile_id)
             }
             return render(request, '500-template.html', context)
-        book = Books.objects.filter(userbooks__user__profile__id=4,
+        book = Books.objects.filter(userbooks__user__profile__id=profile_id,
                                     isbn=isbn).last()
         if book:
             ub = UserBooks.objects.filter(book=book).last()
@@ -151,3 +155,10 @@ def UserReturnBookView(request, profile_id):
 
                 }
                 return render(request, 'success.html', context)
+        else:
+            context = {
+                'body': 'Bu kullanicinin ustinde kitap yok yada baska'
+                'bi hata oldu :d',
+                'url': 'return/book/{}'.format(profile_id)
+            }
+            return render(request, '500-template.html', context)

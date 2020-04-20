@@ -22,4 +22,4 @@ class Books(models.Model):
 
 
 class TimeJumps(models.Model):
-    day = models.IntegerField(blank=True, null=True)
+    day = models.IntegerField(default=0, blank=True, null=True)

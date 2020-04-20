@@ -36,4 +36,8 @@ class UserBooks(models.Model):
 
     @property
     def book_name(self):
+        return '{}'.format(self.book.name)
+
+    @property
+    def book_isbn(self):
         return '{}'.format(self.book.isbn)
