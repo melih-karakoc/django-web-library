@@ -32,7 +32,7 @@ pip install -r config/requirements.txt
 ```
 Finally
 
-##Install pytesseract
+Install pytesseract
 
 ### On Linux
 ```
