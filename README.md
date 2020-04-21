@@ -22,8 +22,10 @@ $ mkvirtualenv vlibrary
 In Addition:
 on ubuntu 12.04 LTS, installing through pip, it is installed to
 /usr/local/bin/virtualenvwrapper.sh
+
 on ubuntu 17.04, installing through pip as a normal user, it is installed to
 ~/.local/bin/virtualenvwrapper.sh
+
 Then 
 ```
 pip install -r config/requirements.txt
