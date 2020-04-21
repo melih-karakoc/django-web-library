@@ -31,7 +31,9 @@ Then
 pip install -r config/requirements.txt
 ```
 Finally
+
 ##Install pytesseract
+
 ### On Linux
 ```
 sudo apt update
